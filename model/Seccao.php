@@ -5,10 +5,10 @@ class Seccao{
     private $idSeccao;
     private $nomeSeccao;
 
-    public function Seccao($idSeccao, $nomeSeccao){
-        $this->setIdSeccao($idSeccao);
-        $this->setNomeSeccao($nomeSeccao);
-    }
+    // public function Seccao($idSeccao, $nomeSeccao){
+    //     $this->__set($idSeccao);
+    //     $this->__set($nomeSeccao);
+    // }
 
     public function __get($atributo){
 		return $this->$atributo;

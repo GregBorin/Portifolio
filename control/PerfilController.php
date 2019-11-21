@@ -3,8 +3,8 @@
 session_start();
 session_unset();
 
-include '../model/Seccao.php';
-include '../dao/SeccaoDAO.php';
+include '../model/Perfil.php';
+include '../dao/PerfilDAO.php';
 
 //var_dump($_POST);
 

@@ -9,7 +9,7 @@ class Conexao extends PDO{
 	public static function getInstancia(){
 		if(!isset(self::$instancia)){
 			try{
-				self::$instancia = new Conexao("mysql:dbname=portifolio;host=localhost","xxxx","xxxx");
+				self::$instancia = new Conexao("mysql:dbname=portifolio;host=localhost","root","");
 			}catch(Exception $e){
 				echo 'Erro ao conectar';
 				exit();
