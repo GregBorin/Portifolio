@@ -18,7 +18,7 @@ include '../dao/PerfilDAO.php';
 
     $_SESSION['seccao'] = serialize($seccao);
     //TODO index.php
-   // header('location:../index.php');
+    header('location:../view/Portifolio.html');
 //} else {
     //TODO error.php
     //header('location:../view/error.php')

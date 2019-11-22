@@ -10,8 +10,14 @@ include '../dao/ConteudoDAO.php';
 
 //if(isset($_POST['nomeSeccao'])){
 
+    $conteudo = new Conteudo();
+    $conteudo->titulo = $_POST['titulo'];
+    $conteudo->subtitulo = $_POST['subtitulo'];
+    $conteudo->descricao = $_POST['descricao'];
+
     $seccao = new Seccao();
-    $seccao->nomeSeccao = $_POST['nomeSeccao'];
+
+    $conteudo->seccao = $_POST['seccao'];
 
     $sDAO = new SeccaoDAO();
     $sDAO->cadastrarSeccao($seccao);

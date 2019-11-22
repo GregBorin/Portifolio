@@ -32,7 +32,9 @@ class Seccao{
     // public function setNomeSeccao($nomeSeccao){
     //     $this->nomeSeccao = $nomeSeccao;
     // }
-
+    public function __toString(){
+		return $this->nomeSeccao;
+	}
 }
 
 ?>

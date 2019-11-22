@@ -1,6 +1,6 @@
 <?php
 
-include 'Conexao.php';
+include '../persistence/Conexao.php';
 
 class SeccaoDAO{
 
@@ -22,12 +22,20 @@ class SeccaoDAO{
                 }
     }
 
-    public function buscarSeccoes(){
+	public function buscarSeccoes(){
+
 		try{
+			function montaObj($idSeccao,$nomeSeccao){
+				$sc = new Seccao();
+				$sc->idSeccao = $idSeccao;
+				$sc->nomeSeccao = $nomeSeccao;
+
+				return $sc;
+			}
 			
 			$stat = $this->conexao->query("select * from seccoes");
 			$array = array();
-			$array = $stat->fetchAll(PDO::FETCH_CLASS,'Seccao');
+			$array = $stat->fetchAll(PDO::FETCH_FUNC,'montaObj');
 			$this->conexao = null;
 			return $array;
 			
