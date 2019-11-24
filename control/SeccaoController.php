@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+//session_start();
 session_unset();
 
 include '../model/Seccao.php';
@@ -11,7 +11,7 @@ if(isset($_GET['op'])){
 	switch($_GET['op']){
 		case 'cad':
 
-            if(isset($_POST['nomeSeccao'])){
+            if(isset($_POST['nomeSeccao']) && !empty($_POST['nomeSeccao'])){
 
                 $seccao = new Seccao();
                 $seccao->nomeSeccao = $_POST['nomeSeccao'];
@@ -21,21 +21,14 @@ if(isset($_GET['op'])){
 
                 $_SESSION['seccao'] = serialize($seccao);
                 
-                header('location:../view/Portifolio.php');
-                seccoes();
+                header("Location: ../view/Portifolio.php");
                 
             } else {
-                //TODO error.php
-                //header('location:../view/error.php')
-                echo "Não tem valor";
+                header('Location:../view/Portifolio.php');
             }
 
         break;
 		
-		//case 'buscar':
-
-            
-            //break;
     }
 
 }
@@ -53,9 +46,5 @@ function seccoes(){
     $arraySeccoes = array();
     $arraySeccoes = $sDAO->buscarSeccoes();
     $_SESSION['seccoes'] = serialize($arraySeccoes);
-    var_dump($_SESSION['seccoes']);
-
-    header('location:../view/Portifolio.php');
 }
-
 ?>
