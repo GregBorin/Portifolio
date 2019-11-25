@@ -4,6 +4,7 @@ class Perfil{
     
     private $idPerfil;
     private $nome;
+    private $sobrenome;
     private $foto;
     private $email;
     private $endereco;

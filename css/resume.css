@@ -60,7 +60,7 @@ p.lead {
     width: 3.5rem;
     background-color: #495057;
     color: #fff !important;
-    border-radius: 100%;
+    /* border-radius: 100%; */
     text-align: center;
     font-size: 1.5rem;
     line-height: 3.5rem;
@@ -189,3 +189,43 @@ a:active {
     cursor: pointer;
     color: #343a40;
 }
+
+#editPerfilIcon {
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+#editPerfilIcon:hover {
+    cursor: pointer;
+    color: #343a40;
+}
+
+.img-perfil{
+    max-width: 50%;
+    max-height: 600px;
+    height: auto;
+}
+#imgPerfilIcon{
+    display: none;
+}
+
+@media (max-width:600px){
+    .img-perfil{
+        display: none;
+    }
+    #imgPerfilIcon{
+        display: inline;
+        max-width: 30px;
+        max-height: 30px;
+    }
+    #imgPerfilIcon:hover{
+        cursor: pointer;
+    }
+}
+
+/* .testtet{
+    display: inline;
+} */

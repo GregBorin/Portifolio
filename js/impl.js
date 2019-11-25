@@ -3,7 +3,7 @@ addSeccao = false;
 function createTextField() {
     if (!addSeccao) {
         document.getElementById('navbar-nav').innerHTML += "<form id='nomeSeccaoForm' action='../control/SeccaoController.php?op=cad' method='post' name='formcad'>" +
-            "<input name='nomeSeccao' id='nomeSeccao' class='form-control'" +
+            "<input name='nomeSeccao' id='nomeSeccao' class='form-control rounded-0'" +
             "type='text' value='' required title='Aperte Enter para confirmar' autofocus/>" +
             "</form>";
         addSeccao = true;
