@@ -185,47 +185,38 @@ a:active {
     margin-bottom: 10px;
 }
 
-#plusIconSeccao:hover {
-    cursor: pointer;
-    color: #343a40;
-}
-
 #editPerfilIcon {
     position: absolute;
     right: 0px;
-    top: 10px;
+    bottom: 0px;
     margin-right: 10px;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-#editPerfilIcon:hover {
+.iconLink:hover {
     cursor: pointer;
     color: #343a40;
 }
 
-.img-perfil{
+.img-perfil {
     max-width: 50%;
     max-height: 600px;
     height: auto;
 }
-#imgPerfilIcon{
+#imgPerfilIcon {
     display: none;
 }
 
 @media (max-width:600px){
-    .img-perfil{
+    .img-perfil {
         display: none;
     }
-    #imgPerfilIcon{
+    #imgPerfilIcon {
         display: inline;
         max-width: 30px;
         max-height: 30px;
     }
-    #imgPerfilIcon:hover{
+    #imgPerfilIcon:hover {
         cursor: pointer;
     }
 }
-
-/* .testtet{
-    display: inline;
-} */

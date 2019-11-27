@@ -3,8 +3,8 @@
 //session_start();
 session_unset();
 
-include '../model/Seccao.php';
-include '../dao/SeccaoDAO.php';
+include_once '../model/Seccao.php';
+include_once '../dao/SeccaoDAO.php';
 
 //var_dump($_POST);
 if(isset($_GET['op'])){
@@ -36,11 +36,12 @@ if(isset($_GET['op'])){
 if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];
     switch($action) {
-        case 'seccoes' : seccoes();break;
+        case 'seccoes' : seccoes();
+        break;
     }
 }
 
-function seccoes(){
+function buscarSeccoes(){
     $sDAO = new SeccaoDAO();
 
     $arraySeccoes = array();

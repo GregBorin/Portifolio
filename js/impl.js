@@ -1,6 +1,7 @@
 addSeccao = false;
+sMCount = 0;
 
-function createTextField() {
+function createSeccaoInput() {
     if (!addSeccao) {
         document.getElementById('navbar-nav').innerHTML += "<form id='nomeSeccaoForm' action='../control/SeccaoController.php?op=cad' method='post' name='formcad'>" +
             "<input name='nomeSeccao' id='nomeSeccao' class='form-control rounded-0'" +
@@ -8,10 +9,10 @@ function createTextField() {
             "</form>";
         addSeccao = true;
         var nomeSeccao = document.getElementById("nomeSeccao");
-        nomeSeccao.addEventListener("keyup", function(event) {
+        nomeSeccao.addEventListener("keyup", function (event) {
             if (event.keyCode === 13) {
                 event.preventDefault();
-                closeTextField()
+                removeSeccaoInput()
             }
         });
     } else {
@@ -20,9 +21,35 @@ function createTextField() {
 
 }
 
-function closeTextField() {
+function removeSeccaoInput() {
+
     if (addSeccao) {
         document.getElementById('nomeSeccaoForm').remove();
         addSeccao = false;
+    }
+}
+
+function addSocialMedia() {
+     
+    placeholderURL= "https://www.socialexmplo.com/social.exemplo";
+    sMCount++;
+    socailURL = "socailURL" + sMCount;
+
+    document.getElementById('descricaoForm').insertAdjacentHTML("afterend", 
+        '<div id="' + socailURL + '" class="input-group mb-3">' +
+            '<input type="text" class="form-control rounded-0" id="inputSocailURL'+sMCount+'" name="inputSocailURL[]" placeholder="'+placeholderURL+'" title="Social Midia URL" autofocus required>' +
+            '<div class="input-group-append">'+
+                '<button class="btn btn-outline-secondary" type="button" title="Remover Social Midia" onclick="removeSocailInput(\'' + socailURL + '\')" >'+
+                    '<i class="fas fa-times fa-1x"></i>' +
+                '</button>'+
+            '</div>'+
+        '</div>');
+
+}
+
+function removeSocailInput(idSocila) {
+
+    if (sMCount > 0) {
+        document.getElementById(idSocila).remove();
     }
 }

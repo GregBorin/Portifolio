@@ -1,6 +1,6 @@
 <?php
 
-include '../persistence/Conexao.php';
+require_once '../persistence/Conexao.php';
 
 class SeccaoDAO{
 

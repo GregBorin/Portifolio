@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once "../control/SeccaoController.php";
-seccoes();
+buscarSeccoes();
+require_once "../control/PerfilController.php";
+buscarPerfil();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -31,7 +33,7 @@ seccoes();
 <body id="page-top">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="testtet">
+    <a>
       <img id="imgPerfilIcon" class="mr-2 float-left" title="Foto Perfil" src="../img/perfil.jpg" alt="" data-toggle="modal" data-target="#imgPerfilModal">
     </a>
     <a class="navbar-brand mr-0 js-scroll-trigger" href="#page-top">
@@ -39,7 +41,7 @@ seccoes();
         Gregory Borin
       </span>
     </a>
-    <button class="navbar-toggler" type="button" onclick="closeTextField()" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" onclick="removeSeccaoInput()" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -59,7 +61,7 @@ seccoes();
 
         ?>
         <div id="adicionarSeccao">
-          <i id="plusIconSeccao" onclick="createTextField()" class="fas fa-plus fa-2x" title="Adicionar Secção"></i>
+          <i id="plusIconSeccao" onclick="createSeccaoInput()" class="fas fa-plus fa-2x iconLink" title="Adicionar Secção"></i>
         </div>
       </ul>
     </div>
@@ -69,14 +71,14 @@ seccoes();
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="sobre">
       <div class="editPerfil">
-        <i id="editPerfilIcon" class="fas fa-edit fa-2x" title="Editar Perfil" data-toggle="modal" data-target="#editPerfilModal"></i>
+        <i id="editPerfilIcon" class="fas fa-edit fa-2x iconLink" title="Editar Perfil" data-toggle="modal" data-target="#editPerfilModal"></i>
       </div>
       <div class="w-100">
         <img class="img-perfil mr-4 mb-4 float-left" src="../img/perfil.jpg" alt="">
         <h1 class="mb-0">Clarence
           <span class="text-primary">Taylor</span>
         </h1>
-        <div class="subheading mb-5">3542 Berry Street · Cheyenne Wells, CO 80810 · (317) 585-8468 ·
+        <div class="subheading mb-5">3542 Berry Street · Cheyenne Wells, CO 80810 ·
           <a href="mailto:name@email.com">name@email.com</a>
         </div>
         <p class="lead mb-5">I am experienced in leveraging agile frameworks to provide a robust synopsis for high level
@@ -129,47 +131,56 @@ seccoes();
   </div>
 
   <div class="modal fade" id="editPerfilModal" tabindex="-1" role="dialog" aria-labelledby="editarInformacoesPerfil" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content rounded-0">
         <div class="modal-header">
           <h5 class="modal-title" id="editarInformacoesPerfil">Editar infromações do Perfil</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form>
+        <form id="formPerfil" action="../control/PerfilController.php?op=edit" method="post" name="formPerfil" enctype="multipart/form-data">
           <div class="modal-body">
-              <div class="w-100">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="Nome" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="Sobrenome" required>
-                  </div>
+            <div class="w-100">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputNome">Nome</label>
+                  <input type="text" class="form-control rounded-0" id="inputNome" name="inputNome" placeholder="" required>
                 </div>
-
-                <div class="form-group">
-                  <label for="competencia">Competência</label>
-                  <input type="text" class="form-control" id="competencia" placeholder="" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="tipos">Tipo</label>
-                  <select class="form-control" id="tipos">
-                    <option>Técnica</option>
-                    <option>Comportamental</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="avaliacaoDesc">Avaliação</label>
-                  <textarea class="form-control" id="avaliacaoDesc" rows="3" required></textarea>
+                <div class="form-group col-md-6">
+                  <label for="inputSobrenome">Sobrenome</label>
+                  <input type="text" class="form-control rounded-0" id="inputSobrenome" name="inputSobrenome" placeholder="" required>
                 </div>
               </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-primary rounded-0">Salvar mudanças</button>
+              <div class="input-group mb-3">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="fileToUpload" id="fileToUpload" required>
+                  <label class="custom-file-label" for="fileToUpload">Escolher imagem de perfil</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail">E-mail</label>
+                <input type="email" class="form-control rounded-0" id="inputEmail" name="inputEmail" placeholder="exemplo@email.com" required>
+              </div>
+              <div class="form-group">
+                <label for="inputEndereco">Endereço</label>
+                <input type="text" class="form-control rounded-0" id="inputEndereco" name="inputEndereco" placeholder="Pais, Estado..." required>
+              </div>
+              <div class="form-group" id="descricaoForm">
+                <label for="inputDescricao">Descrição</label>
+                <textarea class="form-control rounded-0" id="inputDescricao" name="inputDescricao" rows="4" required></textarea>
+              </div>
+            </div>
+            <!-- <div class="form-group" id="socialForm">
+             
+            </div> -->
+            <div class="modal-footer d-flex justify-content-between">
+              <button type="button" class="btn btn-info rounded-0" id="inputEndereco" onclick="addSocialMedia()">
+                <i class="fas fa-plus" title="Adicionar Rede Social"></i>
+                Rede Social
+              </button>
+              <button type="submit" class="btn btn-dark rounded-0">Salvar mudanças</button>
+            </div>
           </div>
         </form>
       </div>
@@ -178,11 +189,11 @@ seccoes();
 
   <div class="modal fade" id="imgPerfilModal" tabindex="-1" role="dialog" aria-labelledby="imagemPerfil" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-          <div class="modal-body mb-0 p-0">
-            <img class="img-fluid" src="../img/perfil.jpg" alt="">
-          </div>
+      <div class="modal-content rounded-0">
+        <div class="modal-body mb-0 p-0">
+          <img class="img-fluid" src="../img/perfil.jpg" alt="">
         </div>
+      </div>
     </div>
   </div>
 

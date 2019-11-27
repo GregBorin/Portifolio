@@ -9,7 +9,7 @@ class Perfil{
     private $email;
     private $endereco;
     private $descricao;
-    private $seccao;
+    private $redes = [];
 
     public function __get($atributo){
 		return $this->$atributo;
