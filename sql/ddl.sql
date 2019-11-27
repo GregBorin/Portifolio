@@ -30,7 +30,7 @@ sobrenome VARCHAR (20) NOT NULL,
 foto VARCHAR( 50 ) NOT NULL,
 email VARCHAR( 100 ) NOT NULL,
 endereco VARCHAR( 200 ) NOT NULL,
-descricao VARCHAR( 100 ) NOT NULL,
+descricao VARCHAR( 1200 ) NOT NULL,
 CONSTRAINT pk_perfil PRIMARY KEY (id_perfil)
  
 ) ENGINE = innodb;

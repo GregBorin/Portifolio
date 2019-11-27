@@ -95,8 +95,9 @@ function buscarPerfil(){
 
     $pDAO = new PerfilDAO();
     $perfil = $pDAO->buscarPerfil();
-    var_dump($perfil);
-    
+
+    //var_dump($perfil);
+
     $_SESSION['perfil'] = serialize($perfil);
 
 }

@@ -36,11 +36,11 @@ function addSocialMedia() {
     socailURL = "socailURL" + sMCount;
 
     document.getElementById('descricaoForm').insertAdjacentHTML("afterend", 
-        '<div id="' + socailURL + '" class="input-group mb-3">' +
+        '<div id="' + socailURL + '" class="input-group rounded-0 mb-3">' +
             '<input type="text" class="form-control rounded-0" id="inputSocailURL'+sMCount+'" name="inputSocailURL[]" placeholder="'+placeholderURL+'" title="Social Midia URL" autofocus required>' +
-            '<div class="input-group-append">'+
-                '<button class="btn btn-outline-secondary" type="button" title="Remover Social Midia" onclick="removeSocailInput(\'' + socailURL + '\')" >'+
-                    '<i class="fas fa-times fa-1x"></i>' +
+            '<div class="input-group-append rounded-0">'+
+                '<button class="btn btn-secondary rounded-0" type="button" title="Remover Social Midia" onclick="removeSocailInput(\'' + socailURL + '\')" >'+
+                    '<i class="fas fa-times fa-1x rounded-0"></i>' +
                 '</button>'+
             '</div>'+
         '</div>');

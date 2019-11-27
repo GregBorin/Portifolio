@@ -69,11 +69,15 @@ class PerfilDAO {
 			$queryPerfil = $this->conexao->query("select * from perfil");
 			$perfilResponse = $queryPerfil->fetchAll(PDO::FETCH_FUNC,'montaPerfil');
 			//$this->conexao = null;
-			
-			$idPerfilResponse = $perfilResponse[0]->idPerfil;
-			$perfilResponse[0]->redes = $this->buscarRedes($idPerfilResponse);
+			if(!empty($perfilResponse)){
+				
+				$idPerfilResponse = $perfilResponse[0]->idPerfil;
+				$perfilResponse[0]->redes = $this->buscarRedes($idPerfilResponse);
 
-			return $perfilResponse;
+				return $perfilResponse;
+			}
+
+			
 			
 		}catch(PDOException $e){
 			echo 'Erro ao buscar perfil';

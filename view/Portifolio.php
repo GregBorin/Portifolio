@@ -18,7 +18,7 @@ buscarPerfil();
   <title>Portifólio</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
@@ -33,14 +33,24 @@ buscarPerfil();
 <body id="page-top">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a>
-      <img id="imgPerfilIcon" class="mr-2 float-left" title="Foto Perfil" src="../img/perfil.jpg" alt="" data-toggle="modal" data-target="#imgPerfilModal">
-    </a>
-    <a class="navbar-brand mr-0 js-scroll-trigger" href="#page-top">
-      <span class="d-block d-lg-none">
-        Gregory Borin
-      </span>
-    </a>
+    <?php
+        if(isset($_SESSION['perfil'])){
+          $perfil = unserialize($_SESSION['perfil']);
+          if (isset($perfil)) {
+            foreach ($perfil as $p) {
+              $picture = $p->foto;
+              $image_src = "../img/".$picture;
+              echo'<img id="imgPerfilIcon" class="mr-2 float-left" title="Foto Perfil" src="'.$image_src.'" data-toggle="modal" data-target="#imgPerfilModal">';
+            
+              echo '<a class="navbar-brand mr-0 js-scroll-trigger" href="#page-top">
+                      <span class="d-block d-lg-none">
+                        '.$p->nome.' '.$p->sobrenome.'
+                      </span>
+                    </a>'; 
+            }  
+          }
+        }
+    ?>  
     <button class="navbar-toggler" type="button" onclick="removeSeccaoInput()" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -74,56 +84,72 @@ buscarPerfil();
         <i id="editPerfilIcon" class="fas fa-edit fa-2x iconLink" title="Editar Perfil" data-toggle="modal" data-target="#editPerfilModal"></i>
       </div>
       <div class="w-100">
-        <img class="img-perfil mr-4 mb-4 float-left" src="../img/perfil.jpg" alt="">
-        <h1 class="mb-0">Clarence
-          <span class="text-primary">Taylor</span>
-        </h1>
-        <div class="subheading mb-5">3542 Berry Street · Cheyenne Wells, CO 80810 ·
-          <a href="mailto:name@email.com">name@email.com</a>
-        </div>
-        <p class="lead mb-5">I am experienced in leveraging agile frameworks to provide a robust synopsis for high level
-          overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall
-          value proposition.</p>
-        <div class="social-icons">
-          <a href="#">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="#">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="#">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-        </div>
+        <?php
+        if(isset($_SESSION['perfil'])){
+          $perfil = unserialize($_SESSION['perfil']);
+          if (isset($perfil)) {
+            foreach ($perfil as $p) {
+              
+              $picture = $p->foto;
+              $image_src = "../img/".$picture;
+
+              echo '<img class="img-perfil mr-4 mb-4 float-left" src="'.$image_src.'" alt="">';
+              echo '<h1 class="mb-0">'.$p->nome.'
+                      <span class="text-primary">'.$p->sobrenome.'</span>
+                    </h1>';
+              echo '<div class="subheading mb-4">'.$p->endereco.'
+                      <a href="mailto:'.$p->email.'">'.$p->email.'</a>
+                    </div>';
+              echo '<p class="lead mb-5">'.$p->descricao.'</p>';
+              if($p->redes){
+                echo '<div class="social-icons">';
+                foreach($p->redes as $r){
+                  echo '<a href="'.$r->url.'">
+                          <i class="fab fa-'.$r->nomeRede.'"></i>
+                        </a>';
+                }
+                echo '</div>';
+              }
+            }
+          } else {
+            echo '<h1 class="mb-0">Nenhum Perfil
+            <span class="text-primary">Cadastrado</span>
+            </h1>';
+          }
+        } else {
+          echo '<h1 class="mb-0">Nãp exite 
+                  <span class="text-primary">sessão</span>
+                </h1>';
+        }
+        ?>
       </div>
     </section>
 
     <?php
     if (isset($_SESSION['seccoes'])) {
       $seccoes = unserialize($_SESSION['seccoes']);
-      foreach ($seccoes as $scc) {
-        echo '<hr class="m-0">
-              <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="' . $scc . '">
-                <div class="w-100">
-                  <h2 class="mb-5">' . $scc . '</h2>
-                  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                    <div class="resume-content">
-                      <h3 class="mb-0">Senior Web Developer</h3>
-                      <div class="subheading mb-3">Intelitec Solutions</div>
-                      <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day,
-                        going forward, a new normal that has evolved from generation X is on the runway heading towards a
-                        streamlined cloud solution. User generated content in real-time will have multiple touchpoints for
-                        offshoring.</p>
-                    </div>
-                    <div class="resume-date text-md-right">
-                      <span class="text-primary">March 2013 - Present</span>
-                    </div>
-                  </div>
-                </div>
-              </section>';
+      if(isset($seccoes)){
+        foreach ($seccoes as $scc) {
+          echo '<hr class="m-0">
+          <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="' . $scc . '">
+          <div class="w-100">
+          <h2 class="mb-5">' . $scc . '</h2>
+          <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+          <h3 class="mb-0">Senior Web Developer</h3>
+          <div class="subheading mb-3">Intelitec Solutions</div>
+          <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day,
+          going forward, a new normal that has evolved from generation X is on the runway heading towards a
+          streamlined cloud solution. User generated content in real-time will have multiple touchpoints for
+          offshoring.</p>
+          </div>
+          <div class="resume-date text-md-right">
+          <span class="text-primary">March 2013 - Present</span>
+          </div>
+          </div>
+          </div>
+          </section>';
+        }
       }
     }
     ?>
@@ -154,8 +180,8 @@ buscarPerfil();
               </div>
               <div class="input-group mb-3">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" name="fileToUpload" id="fileToUpload" required>
-                  <label class="custom-file-label" for="fileToUpload">Escolher imagem de perfil</label>
+                  <input type="file" class="custom-file-input rounded-0" name="fileToUpload" id="fileToUpload" required>
+                  <label class="custom-file-label rounded-0" for="fileToUpload">Escolher imagem de perfil</label>
                 </div>
               </div>
               <div class="form-group">
@@ -189,9 +215,20 @@ buscarPerfil();
 
   <div class="modal fade" id="imgPerfilModal" tabindex="-1" role="dialog" aria-labelledby="imagemPerfil" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content rounded-0">
+      <div class="modal-content border-0 rounded-0">
         <div class="modal-body mb-0 p-0">
-          <img class="img-fluid" src="../img/perfil.jpg" alt="">
+        <?php
+          if(isset($_SESSION['perfil'])){
+            $perfil = unserialize($_SESSION['perfil']);
+            if (isset($perfil)) {
+              foreach ($perfil as $p) {
+                $picture = $p->foto;
+                $image_src = "../img/".$picture;
+                echo '<img class="img-fluid" src="'.$image_src.'" alt="">';
+              }
+            }
+          }
+        ?>
         </div>
       </div>
     </div>
