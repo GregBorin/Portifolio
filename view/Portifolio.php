@@ -80,7 +80,7 @@ buscarPerfil();
     <!-- Começo section de informações do perfil -->
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="sobre">
       <div class="w-100">
-        <div class="editPerfil text-right">
+        <div class="editPerfil">
           <i id="editPerfilIcon" class="fas fa-edit fa-2x iconLink" title="Editar Perfil" data-toggle="modal" data-target="#editPerfilModal"></i>
         </div>
         <?php
