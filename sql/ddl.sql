@@ -27,7 +27,7 @@ CREATE TABLE perfil (
 id_perfil INT NOT NULL AUTO_INCREMENT,
 nome VARCHAR( 20 ) NOT NULL,
 sobrenome VARCHAR (20) NOT NULL,
-foto VARCHAR( 50 ) NOT NULL,
+foto VARCHAR( 100 ),
 email VARCHAR( 100 ) NOT NULL,
 endereco VARCHAR( 200 ) NOT NULL,
 descricao VARCHAR( 1200 ) NOT NULL,

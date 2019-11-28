@@ -33,13 +33,13 @@ function addSocialMedia() {
      
     placeholderURL= "https://www.socialexmplo.com/social.exemplo";
     sMCount++;
-    socailURL = "socailURL" + sMCount;
+    socialURL = "socialURL" + sMCount;
 
     document.getElementById('descricaoForm').insertAdjacentHTML("afterend", 
-        '<div id="' + socailURL + '" class="input-group rounded-0 mb-3">' +
-            '<input type="text" class="form-control rounded-0" id="inputSocailURL'+sMCount+'" name="inputSocailURL[]" placeholder="'+placeholderURL+'" title="Social Midia URL" autofocus required>' +
+        '<div id="' + socialURL + '" class="input-group rounded-0 mb-3">' +
+            '<input type="text" class="form-control rounded-0" id="inputSocialURL'+sMCount+'" name="inputSocialURL[]" placeholder="'+placeholderURL+'" title="Social Midia URL" autofocus required>' +
             '<div class="input-group-append rounded-0">'+
-                '<button class="btn btn-secondary rounded-0" type="button" title="Remover Social Midia" onclick="removeSocailInput(\'' + socailURL + '\')" >'+
+                '<button class="btn btn-secondary rounded-0" type="button" title="Remover Social Midia" onclick="removeSocialInput(\'' + socialURL + '\')" >'+
                     '<i class="fas fa-times fa-1x rounded-0"></i>' +
                 '</button>'+
             '</div>'+
@@ -47,9 +47,20 @@ function addSocialMedia() {
 
 }
 
-function removeSocailInput(idSocila) {
+function removeSocialInput(idSocial) {
 
     if (sMCount > 0) {
-        document.getElementById(idSocila).remove();
+        document.getElementById(idSocial).remove();
     }
 }
+
+function removeSocialInputEd(idSocial) {
+    console.log(idSocial);
+    document.getElementById(idSocial).remove();
+}
+
+$('#document').ready(function(){
+    $('#editPerfilModal').on('hidden.bs.modal', function () {
+        location.reload();
+    });
+});
