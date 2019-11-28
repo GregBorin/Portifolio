@@ -186,7 +186,7 @@ a:active {
 }
 
 #editPerfilIcon {
-    position: fixed;
+    position: absolute;
     right: 0px;
     bottom: 0px;
     margin-right: 10px;
