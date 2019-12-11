@@ -3,8 +3,8 @@
 session_start();
 session_unset();
 
-include '../model/Redes.php';
-include '../dao/RedesDAO.php';
+include_once '../model/Redes.php';
+include_once '../dao/RedesDAO.php';
 
 //var_dump($_POST);
 

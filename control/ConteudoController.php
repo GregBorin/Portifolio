@@ -3,8 +3,8 @@
 session_start();
 session_unset();
 
-include '../model/Conteudo.php';
-include '../dao/ConteudoDAO.php';
+include_once '../model/Conteudo.php';
+include_once '../dao/ConteudoDAO.php';
 
 //var_dump($_POST);
 

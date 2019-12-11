@@ -3,9 +3,9 @@
 class Redes{
     
     private $idRede;
+    private $idPerfil;
     private $nomeRede;
     private $url;
-    private $perfil;
 
     public function __get($atributo){
 		return $this->$atributo;
